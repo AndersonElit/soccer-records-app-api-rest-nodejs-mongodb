@@ -29,4 +29,27 @@ router.get('/:id', async (req, res) => {
     res.json(result);
 })
 
+router.delete('/:id', async (req, res) => {
+    const {id} = req.params;
+    const db = await connect();
+    const result = await db.collection('leagues').deleteOne({_id: ObjectID(id)});
+    res.json({
+        message: 'item con ${id} eliminado',
+        result
+    })
+})
+
+router.put('/:id', async (req, res) => {
+    const {id} = req.params;
+    const updateLeague = {
+        temp: req.body.temp,
+        team: req.body.team
+    };
+    const db = await connect();
+    await db.collection('leagues').updateOne({_id: ObjectID(id)}, { $set: updateLeague });
+    res.json({
+        message: 'League ${id} updated'
+    })
+})
+
 export default router;
