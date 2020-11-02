@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
         temp: req.body.temp,
         team: req.body.team
     }
-    const result = await db.collection('leagues').insert(task);
+    const result = await db.collection('leagues').insertOne(task);
     res.json(result.ops[0]);
 })
 
