@@ -5,13 +5,14 @@ const router = Router();
 import { connect } from '../database'
 import { ObjectID } from 'mongodb'
 
-router.get('/', async (req, res) => {
+router.post('/getLeague', async (req, res) => {
     const db = await connect();
-    const result = await db.collection('premier_league').find({}).toArray();
+    const league_name = req.body.league;
+    const result = await db.collection(league_name).find({}).toArray();
     res.json(result);
 })
 
-router.post('/', async (req, res) => {
+router.post('/add', async (req, res) => {
     const db = await connect();
     const league_name = req.body.league;
     
