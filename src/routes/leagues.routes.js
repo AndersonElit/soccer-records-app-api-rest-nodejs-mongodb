@@ -7,7 +7,7 @@ import { ObjectID } from 'mongodb'
 
 router.get('/', async (req, res) => {
     const db = await connect();
-    const result = await db.collection('leagues').find({}).toArray();
+    const result = await db.collection('premier_league').find({}).toArray();
     res.json(result);
 })
 
@@ -15,12 +15,13 @@ router.post('/', async (req, res) => {
     const db = await connect();
     const league_name = req.body.league;
     
-    const league = {
-        league: req.body.league,
-        temps: req.body.temps
+    const temp = {
+        temp: req.body.temp,
+        teams: req.body.teams,
+        dates: req.body.dates
     }
     
-    const result = await db.collection(league_name).insertOne(league);
+    const result = await db.collection(league_name).insertOne(temp);
     res.json(result.ops[0]);
     
 })
