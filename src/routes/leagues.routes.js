@@ -13,12 +13,16 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     const db = await connect();
-    const task = {
-        temp: req.body.temp,
-        team: req.body.team
+    const league_name = req.body.league;
+    
+    const league = {
+        league: req.body.league,
+        temps: req.body.temps
     }
-    const result = await db.collection('leagues').insertOne(task);
+    
+    const result = await db.collection(league_name).insertOne(league);
     res.json(result.ops[0]);
+    
 })
 
 router.get('/:id', async (req, res) => {

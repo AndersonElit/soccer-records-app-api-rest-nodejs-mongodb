@@ -4,7 +4,7 @@ const app = express();
 
 //Routes
 import IndexRoutes from './routes/index.routes'
-import TaskRoutes from './routes/tasks.routes'
+import LeaguesRoutes from './routes/leagues.routes'
 
 //settings
 app.set('port', process.env.PORT || 3000);
@@ -14,6 +14,6 @@ app.use(json());
 
 //Routes
 app.use(IndexRoutes);
-app.use('/tasks', TaskRoutes);
+app.use('/leagues', LeaguesRoutes);
 
 export default app;
